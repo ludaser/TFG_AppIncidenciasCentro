@@ -16,7 +16,7 @@ public interface UsuarioDao {
     @Query("SELECT * FROM Usuario WHERE id = :id")
     Usuario getById(int id);
 
-    // ✅ AÑADIR ESTE
+    // AÑADIR ESTE
     @Query("SELECT * FROM Usuario WHERE email = :email LIMIT 1")
     Usuario getByEmail(String email);
 }
