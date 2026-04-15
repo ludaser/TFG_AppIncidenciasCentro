@@ -94,9 +94,10 @@
         android:layout_marginEnd="32dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tilUsuarioEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- CONTRASEÑA -->
@@ -119,9 +120,10 @@
         android:layout_marginEnd="32dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tilPasswordEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- BOTON LOGIN -->

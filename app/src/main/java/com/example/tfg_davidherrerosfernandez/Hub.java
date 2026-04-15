@@ -1,7 +1,9 @@
 package com.example.tfg_davidherrerosfernandez;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +32,17 @@ public class Hub extends AppCompatActivity {
         cardreporterapido.setOnClickListener(v -> {
             Intent intent = new Intent(Hub.this, Reporte.class);
             startActivity(intent);
+        });
+
+        ImageButton btnCerrar = findViewById(R.id.botonCerrarSesion);
+
+        btnCerrar.setOnClickListener(v -> {
+
+            SharedPreferences prefs = getSharedPreferences("sesion", MODE_PRIVATE);
+            prefs.edit().clear().apply();
+
+            startActivity(new Intent(Hub.this, Logueo.class));
+            finish();
         });
     }
 }
