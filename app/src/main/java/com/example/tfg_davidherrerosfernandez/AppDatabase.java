@@ -7,10 +7,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Usuario.class}, version = 1)
+@Database(entities = {Usuario.class, Incidencia.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UsuarioDao usuarioDao();
+
+    // 🔥 ESTA LÍNEA ES LA CLAVE (seguro que te falta o no se ha actualizado)
+    public abstract IncidenciaDao incidenciaDao();
 
     private static AppDatabase INSTANCE;
 
@@ -22,6 +25,8 @@ public abstract class AppDatabase extends RoomDatabase {
                             "mi_base_datos"
                     )
                     .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries() // esto ultimo es nuevo
                     .addCallback(roomCallback)
                     .build();
         }
@@ -36,7 +41,6 @@ public abstract class AppDatabase extends RoomDatabase {
             new Thread(() -> {
                 UsuarioDao dao = INSTANCE.usuarioDao();
 
-                //  TÉCNICO
                 Usuario tecnico = new Usuario();
                 tecnico.nombre = "Tecnico 1";
                 tecnico.email = "tecnico@efas.com";
@@ -44,7 +48,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 tecnico.rol = "tecnico";
                 dao.insertar(tecnico);
 
-                //  PROFESOR
                 Usuario profesor = new Usuario();
                 profesor.nombre = "Profesor 1";
                 profesor.email = "profesor@efas.com";
@@ -52,7 +55,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 profesor.rol = "profesor";
                 dao.insertar(profesor);
 
-                // ALUMNO
                 Usuario alumno = new Usuario();
                 alumno.nombre = "Alumno 1";
                 alumno.email = "alumno@efas.com";

@@ -132,6 +132,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/etUbicacion"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="12dp"
@@ -142,6 +143,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/etPrioridad"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="12dp"
@@ -152,6 +154,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/etCategoria"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="12dp"
@@ -162,6 +165,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/etDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginTop="12dp"

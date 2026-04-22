@@ -58,6 +58,13 @@ public class Hub extends AppCompatActivity {
             startActivity(intent);
         });
 
+        MaterialCardView cardmisincidencia = findViewById(R.id.cardmisincidencias);
+
+        cardmisincidencia.setOnClickListener(v -> {
+            Intent intent = new Intent(Hub.this, MisIncidencias.class);
+            startActivity(intent);
+        });
+
         //  CERRAR SESIÓN
         ImageButton btnCerrar = findViewById(R.id.botonCerrarSesion);
 

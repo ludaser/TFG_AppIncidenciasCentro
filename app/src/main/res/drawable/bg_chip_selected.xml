@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Color principal seleccionado (verde app) -->
+    <solid android:color="#1B5E20"/>
+
+    <!-- Bordes redondeados tipo chip -->
+    <corners android:radius="20dp"/>
+
+    <!-- Sin borde (más limpio cuando está seleccionado) -->
+    <stroke
+        android:width="0dp"
+        android:color="@android:color/transparent"/>
+
+    <!-- Espaciado interno -->
+    <padding
+        android:left="12dp"
+        android:top="6dp"
+        android:right="12dp"
+        android:bottom="6dp"/>
+</shape>

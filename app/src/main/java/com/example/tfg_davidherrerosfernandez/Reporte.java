@@ -2,10 +2,13 @@ package com.example.tfg_davidherrerosfernandez;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -20,6 +23,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Reporte extends AppCompatActivity {
 
@@ -75,6 +82,54 @@ public class Reporte extends AppCompatActivity {
         });
 
         cardUpload.setOnClickListener(v -> mostrarOpcionesImagen());
+
+        //ESTO ULTIMO LO HE METIDO
+
+        AppDatabase db = AppDatabase.getDatabase(this);
+
+        EditText etUbicacion = findViewById(R.id.etUbicacion);
+        EditText etPrioridad = findViewById(R.id.etPrioridad);
+        EditText etCategoria = findViewById(R.id.etCategoria);
+        EditText etDescripcion = findViewById(R.id.etDescripcion);
+
+        Button btnEnviar = findViewById(R.id.btnEnviar);
+
+        btnEnviar.setOnClickListener(v -> {
+
+            String ubicacion = etUbicacion.getText().toString().trim();
+            String prioridad = etPrioridad.getText().toString().trim();
+            String categoria = etCategoria.getText().toString().trim();
+            String descripcion = etDescripcion.getText().toString().trim();
+
+            if (ubicacion.isEmpty() || prioridad.isEmpty() || categoria.isEmpty() || descripcion.isEmpty()) {
+                Toast.makeText(this, "Rellena todos los campos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            SharedPreferences prefs = getSharedPreferences("sesion", MODE_PRIVATE);
+            int usuarioId = prefs.getInt("usuarioId", -1);
+
+            if (usuarioId == -1) {
+                Toast.makeText(this, "Error de sesión", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                    .format(new Date());
+
+            Incidencia i = new Incidencia();
+            i.titulo = categoria;
+            i.descripcion = descripcion + " (" + ubicacion + ")";
+            i.prioridad = prioridad;
+            i.fecha = fecha;
+            i.usuarioId = usuarioId;
+
+            db.incidenciaDao().insertar(i);
+
+            Toast.makeText(this, "Incidencia enviada", Toast.LENGTH_SHORT).show();
+
+            finish();
+        });
     }
 
 
